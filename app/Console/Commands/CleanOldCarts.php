@@ -1,8 +1,10 @@
 <?php
 
+namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Carbon\Carbon;
 use App\Models\Cart;
+
 
 class CleanOldCarts extends Command
 {

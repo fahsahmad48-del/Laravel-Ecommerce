@@ -1,5 +1,3 @@
-<x-layout>
-
 <style>
 body { background: #f5f6f8; }
 
@@ -169,7 +167,16 @@ body { background: #f5f6f8; }
     padding: 0.75rem !important;
   }
 }
+
+/* FIX: Hide data-label content on desktop */
+@media (min-width: 577px) {
+  .table td::before {
+    display: none !important;
+  }
+}
 </style>
+
+<x-layout>
 
 <div class="container my-5">
 
@@ -229,31 +236,24 @@ body { background: #f5f6f8; }
             </thead>
 
             <tbody>
-
-                @php
-                   $totalPrice = 0 ;
-                @endphp
+              @php $totalPrice = 0; @endphp
 
               @foreach($order->items as $item)
-              @php
-                $totalPrice += $item->price * $item->quantity;
-              @endphp
-              <tr>
-                <td data-label="Image">
-                  <img src="{{ asset('storage/' . $item->product->main_img) }}"
-                       class="product-img">
-                </td>
-
-                <td data-label="Product">{{ $item->product->name }}</td>
-
-                <td data-label="Price">${{ number_format($item->price, 2) }}</td>
-
-                <td data-label="Qty">{{ $item->quantity }}</td>
-
-                <td data-label="Total">
-                  ${{ number_format($item->price * $item->quantity, 2) }}
-                </td>
-              </tr>
+                @php $totalPrice += $item->price * $item->quantity; @endphp
+                <tr>
+                  <td data-label="Image">
+                    <img src="{{ asset('storage/' . $item->product->main_img) }}"
+                         class="product-img"
+                         alt="{{ $item->product->name }}"
+                         onerror="this.src='{{ asset('images/default-product.png') }}'">
+                  </td>
+                  <td data-label="Product">{{ $item->product->name }}</td>
+                  <td data-label="Price">${{ number_format($item->price, 2) }}</td>
+                  <td data-label="Qty">{{ $item->quantity }}</td>
+                  <td data-label="Total">
+                    ${{ number_format($item->price * $item->quantity, 2) }}
+                  </td>
+                </tr>
               @endforeach
 
             </tbody>

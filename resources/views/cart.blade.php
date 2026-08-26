@@ -146,7 +146,7 @@ body { background: #f5f6f8; padding-top: 80px; }
   z-index: 1000;
 }
 
-/* 📱 MOBILE RESPONSIVE ADJUSTMENTS */
+/*  MOBILE RESPONSIVE ADJUSTMENTS */
 @media (max-width: 576px) {
   body {
     padding-top: 20px;
